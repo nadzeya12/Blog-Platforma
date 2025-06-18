@@ -115,8 +115,8 @@ const formatErrors = (error: ValidationError): validationErrorType => {
     const exprressError = error as unknown as FieldValidationError;
 
     return {
-        field: exprressError.path,
-        message: exprressError.msg
+        message: exprressError.msg,
+        field: exprressError.path
     };
 };
 
