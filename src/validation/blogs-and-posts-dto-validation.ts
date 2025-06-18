@@ -38,9 +38,9 @@ const websiteUrlValidation = body("websiteUrl")
     .withMessage("Invalid website URL format");
 
 export const blogsValidation = [
+    websiteUrlValidation,
     blogNameValidation,
-    blogDescriptionValidation,
-    websiteUrlValidation
+    blogDescriptionValidation
 ]
 
 
@@ -99,8 +99,8 @@ export const postsBlogNameValidation = body("blogName")
     })
 
 export const postsValidation = [
-    postTitleValidation,
     postShortDescriptionValidation,
+    postTitleValidation,
     postContentValidation,
     postBlogIdValidation,
    //  postsBlogNameValidation,
