@@ -6,5 +6,6 @@ export const testingRout = Router();
 testingRout.delete("/testing-data", (req, res) => {
     db.Blogs = [];
     db.Posts = [];
-    res.send("All data deleted").status(204);
+    res.status(204).send('');
+    return;
 });

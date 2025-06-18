@@ -7,5 +7,6 @@ exports.testingRout = (0, express_1.Router)();
 exports.testingRout.delete("/testing-data", (req, res) => {
     db_blogs_and_posts_1.db.Blogs = [];
     db_blogs_and_posts_1.db.Posts = [];
-    res.send("All data deleted").status(204);
+    res.status(204).send('');
+    return;
 });

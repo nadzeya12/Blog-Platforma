@@ -3,7 +3,7 @@ import {postsRepository} from "../../Repositories/PostsRepository";
 import {blogRepository} from "../../Repositories/BlogRepository";
 import {PostInputModel, PostViewModel} from "../../db/db-blogs-and-posts";
 
-export function createNewPost(req: Request<PostInputModel>, res: Response) {
+export function     createNewPost(req: Request<PostInputModel>, res: Response) {
     const newPost: PostInputModel = {
         title: req.body.title,
         shortDescription: req.body.shortDescription,

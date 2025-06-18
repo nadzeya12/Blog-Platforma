@@ -14,5 +14,5 @@ blogsRouter
     .get("/blogs/:id", idValidation, validationResultMiddleware, getBlogById)
     .delete("/blogs/:id", adminMiddleware, idValidation, validationResultMiddleware, deleteBlogById)
     .post("/blogs", adminMiddleware, blogsValidation, validationResultMiddleware, createNewBlog)
-    .put("/blogs/:id",adminMiddleware, idValidation,blogsValidation, validationResultMiddleware,updateBlogById)
+    .put("/blogs/:id",adminMiddleware, idValidation,blogsValidation, validationResultMiddleware, updateBlogById)
 
