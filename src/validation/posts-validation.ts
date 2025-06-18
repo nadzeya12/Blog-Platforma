@@ -4,18 +4,18 @@ import {validationErrorType} from "../types/validationErrorType";
 export const postsInputDtoValidation = (data: PostInputModel): validationErrorType[] => {
     const errors: validationErrorType[] = [];
     if (data.title.trim().length < 1 || data.title.trim().length > 30) {
-        errors.push({ field: 'title', message: 'Invalid title' });
+        errors.push({ message: 'Invalid title', field: 'title' });
     }
 
     if (data.shortDescription.trim().length < 1 || data.shortDescription.trim().length > 100) {
-        errors.push({ field: 'shortDescription', message: 'Invalid shortDescription' });
+        errors.push({ message: 'Invalid shortDescription', field: 'shortDescription'});
     }
 
     if (data.content.trim().length > 1000) {
-        errors.push({ field: 'content', message: 'Content must not exceed 1000 characters' });
+        errors.push({ message: 'Content must not exceed 1000 characters', field: 'content', });
     }
     if (data.blogId.trim().length < 1) {
-        errors.push({ field: 'blogId', message: 'Invalid blogId' });
+        errors.push({ message: 'Invalid blogId', field: 'blogId'});
     }
     return errors;
 }

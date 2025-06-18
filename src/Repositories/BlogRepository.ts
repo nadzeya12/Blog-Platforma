@@ -14,8 +14,8 @@ export const blogRepository = {
         if (index === -1) {
             throw new Error("Blog does not exist");
         }
-        return db.Blogs.find(blog => blog.id === id) as BlogViewModel;
         db.Blogs.splice(index, 1)
+        return db.Blogs.find(blog => blog.id === id) as BlogViewModel;
 },
     create(createdBlog: BlogViewModel): BlogViewModel {
         db.Blogs.push()

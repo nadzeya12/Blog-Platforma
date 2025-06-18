@@ -26,7 +26,7 @@ export const postsRepository = {
         if (index === -1) {
             throw new Error("Blog does not exist");
         }
-        return db.Posts.find(post => post.id === id) as PostViewModel;
         db.Posts.splice(index, 1)
+        return db.Posts.find(post => post.id === id) as PostViewModel;
     },
 }
