@@ -3,7 +3,7 @@ import {db} from "../db/db-blogs-and-posts";
 
 export const testingRout = Router();
 
-testingRout.delete("/testing-data", (req, res) => {
+testingRout.delete("/testing/all-data", (req, res) => {
     db.Blogs = [];
     db.Posts = [];
     res.status(204).send('');
