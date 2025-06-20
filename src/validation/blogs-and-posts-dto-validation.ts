@@ -108,7 +108,7 @@ export const postsValidation = [
 
 
 export const createErrorMessages = (errors: validationErrorType[]): validationErrorDto => {
-    return { errorMessages: errors };
+    return { errorsMessages: errors };
 };
 
 const formatErrors = (error: ValidationError): validationErrorType => {
@@ -129,7 +129,8 @@ export const validationResultMiddleware = (
          .formatWith(formatErrors)
          .array({onlyFirstError: true});
     if (errors.length > 0) {
-        res.status(400).send({errorMessages: errors});
+        const errorResponse = createErrorMessages(errors);
+        res.status(400).json(errorResponse);
         return;
     }
     next();
