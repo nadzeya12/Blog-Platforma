@@ -8,6 +8,8 @@ export type BlogViewModel = {
     name: string,
     description: string,
     websiteUrl: string,
+    createdAt: string,
+    isMembership: boolean,
 }
 export type PostInputModel = {
     title: string,
@@ -22,29 +24,37 @@ export type PostViewModel = {
     content: string,
     blogId: BlogViewModel["id"],
     blogName:string,
+    createdAt: string,
 }
 export const db = {
-    Blogs: <BlogViewModel[]>[
+    Blogs: <BlogViewModel[]><unknown>[
         {
             id: "1",
+            _id: "38644230942902a7afe45d91",
             name: "Blog 1",
             description: "something for the description",
             websiteUrl: "https://blogs.google.com/",
+            createdAt: "2019-03-14T00:00:00.000Z",
+            isMembership: false,
         },
         {
             id: "2",
             name: "Blog 2",
             description: "something for the description",
             websiteUrl: "https://blogs.google.com/",
+            createdAt: "2023-03-14T00:00:00.000Z",
+            isMembership: false,
         },
         {
             id: "3",
             name: "Blog 3",
             description: "something for the description",
             websiteUrl: "https://blogs.google.com/",
+            createdAt: "2024-03-14T00:00:00.000Z",
+            isMembership: false,
         }
-        ],
-    Posts: <PostViewModel[]>[
+    ],
+    Posts: <PostViewModel[]><unknown>[
         {
             id: "1",
             title: "Post 1",
@@ -52,6 +62,7 @@ export const db = {
             content: "videos and posts",
             blogId: "1",
             blogName: "Blog 1",
+            createdAt: "2023-04-14T00:00:00.000Z",
         },
         {
             id: "2",
@@ -60,6 +71,7 @@ export const db = {
             content: "posts",
             blogId: "2",
             blogName: "Blog 2",
+            createdAt: "2023-07-14T00:00:00.000Z",
         },
         {
             id: "3",
@@ -68,6 +80,7 @@ export const db = {
             content: "news",
             blogId: "3",
             blogName: "Blog 3",
+            createdAt: "2025-08-14T00:00:00.000Z",
         }
     ]
 }

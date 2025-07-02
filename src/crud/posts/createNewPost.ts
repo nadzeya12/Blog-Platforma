@@ -1,26 +1,29 @@
 import {Response, Request} from "express";
 import {postsRepository} from "../../Repositories/PostsRepository";
-import {blogRepository} from "../../Repositories/BlogRepository";
 import {db, PostInputModel, PostViewModel} from "../../db/db-blogs-and-posts";
+import {mapToPostViewModel} from "../../core/utils/map-to-viewModel";
+import {ObjectId} from "mongodb";
 
-export function     createNewPost(req: Request<PostInputModel>, res: Response) {
-    const newPost: PostInputModel = {
-        title: req.body.title,
-        shortDescription: req.body.shortDescription,
-        content: req.body.content,
-        blogId: req.body.blogId,
-    };
-    const blog = blogRepository.findById(newPost.blogId);
-    if (!blog) {
-         res.status(400).send({ error: "Blog not found" });
-        return
+export async function createNewPost(req: Request<{id: string}, PostInputModel>, res: Response) {
+
+    try {
+        const index: number = db.Posts.findIndex((post: PostViewModel) => post.id === post.id);
+        const newPost : PostInputModel = {
+            title: req.body.title,
+            shortDescription: req.body.shortDescription,
+            content: req.body.content,
+            blogId: req.body.blogId,
+        }
+        const newPostView: PostViewModel = {
+            ...newPost,
+            id: new ObjectId().toString(),
+            blogName: db.Posts[index].blogName,
+            createdAt: new Date().toISOString(),
+        }
+        const createdPost = await postsRepository.create(newPostView);
+        const mappedCreatedPost = mapToPostViewModel(createdPost);
+        res.status(201).send(mappedCreatedPost);
+    } catch (err) {
+        res.status(400).send(err);
     }
-    const createdPost: PostViewModel = {
-        id: `post_${Date.now()}_${Math.floor(Math.random() * 1000)}` as string, // Простой уникальный ID
-        ...newPost,
-        blogName: blog.name
-    }
-    db.Posts.push(createdPost);
-    postsRepository.create(createdPost);
-    res.status(201).send(createdPost);
 }

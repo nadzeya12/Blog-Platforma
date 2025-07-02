@@ -3,6 +3,9 @@ import {Request, Response, NextFunction} from "express";
 import {validationErrorType} from "../types/validationErrorType";
 import {validationErrorDto} from "../types/errordto";
 import {db} from "../db/db-blogs-and-posts";
+import {blogsCollection} from "../db/mongo-db";
+import {ObjectId} from "mongodb";
+import {blogRepository} from "../Repositories/BlogRepository";
 
 export const idValidation = param("id")
     .exists()
@@ -11,6 +14,7 @@ export const idValidation = param("id")
     .withMessage("ID must be a string")
     .trim()
     .withMessage("ID cannot be empty")
+    .isMongoId()
 
 export const blogNameValidation = body('name')
     .isString()
@@ -77,8 +81,9 @@ export const postBlogIdValidation = body("blogId")
     .withMessage("BlogId must be a string")
     .notEmpty()
     .withMessage("BlogId cannot be empty")
+    .isMongoId()
     .custom((blogId: string) => {
-        const blog = db.Blogs.find(blog => blog.id === blogId);
+        const blog = blogRepository.findById(blogId);
         if (!blog) {
             throw new Error("Blog with this Id does not exist");
         }
@@ -103,7 +108,6 @@ export const postsValidation = [
     postTitleValidation,
     postContentValidation,
     postBlogIdValidation,
-   //  postsBlogNameValidation,
 ]
 
 

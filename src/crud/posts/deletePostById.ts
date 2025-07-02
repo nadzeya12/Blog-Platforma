@@ -2,17 +2,22 @@ import {Response, Request} from "express";
 import {postsRepository} from "../../Repositories/PostsRepository";
 import {createErrorMessages} from "../../core/utils/errorUtil";
 
-export function deletePostById(req: Request, res: Response) {
-    const id = req.params.id;
-    const post = postsRepository.findById(id);
+export async function deletePostById(req: Request, res: Response) {
+    try {
 
-    if (!post) {
+        const id = req.params.id;
+        const post = await postsRepository.findById(id);
+
+        if (!post) {
         res.status(404).send(createErrorMessages([{
             field: 'id',
-            message: `No blog with id ${id}`,
+            message: `No post with id ${id}`,
         }]));
         return;
+        }
+        await postsRepository.delete(id);
+        res.status(204).send("post deleted successfully");
+    } catch (err){
+        res.status(404).send(err);
     }
-    postsRepository.delete(id);
-    res.status(204).send("blog deleted successfully");
 }

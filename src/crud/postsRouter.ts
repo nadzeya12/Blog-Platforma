@@ -3,9 +3,9 @@ import {getAllPosts} from "./posts/getAllPosts";
 import {getPostById} from "./posts/getPostById";
 import {adminMiddleware} from "../authorization/auth";
 import {idValidation, postsValidation, validationResultMiddleware} from "../validation/blogs-and-posts-dto-validation";
-import {createNewPost} from "./posts/createNewPost";
 import {updatePostById} from "./posts/updatePostById";
 import {deletePostById} from "./posts/deletePostById";
+import {createNewPost} from "./posts/createNewPost";
 
 export const postsRouter = Router({});
 

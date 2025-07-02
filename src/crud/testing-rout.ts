@@ -1,11 +1,13 @@
 import {Router} from "express";
-import {db} from "../db/db-blogs-and-posts";
+import {blogsCollection, postsCollection} from "../db/mongo-db";
 
 export const testingRout = Router();
 
-testingRout.delete("/testing/all-data", (req, res) => {
-    db.Blogs = [];
-    db.Posts = [];
-    res.status(204).send('');
-    return;
+testingRout.delete("/testing/all-data", async (req, res) => {
+    await Promise.all([
+            blogsCollection.deleteMany(),
+            postsCollection.deleteMany(),
+        ]
+    )
+    res.status(204);
 });
