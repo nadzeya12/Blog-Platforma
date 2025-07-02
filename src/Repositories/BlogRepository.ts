@@ -24,16 +24,10 @@ export const blogRepository = {
     return {...newBlog, _id: insert.insertedId };
 },
     async update(id: string, updatedBlog: BlogInputModel): Promise<void> {
-        // const index: number = db.Blogs.findIndex((blog: BlogModel) => blog.id === blog.id);
-        //
-        // if (index === -1) {
-        //     throw new Error("Blog does not exist");
-        // }
-
         const updatedBlogWithId = await blogsCollection.updateOne(
             { _id: new ObjectId(id)},
             {
-            ...updatedBlog,
+                ...updatedBlog
         });
         if (updatedBlogWithId.matchedCount < 1) {
             throw new Error("Blog does not exist");

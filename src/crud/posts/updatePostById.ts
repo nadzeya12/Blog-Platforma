@@ -16,7 +16,7 @@ export async function updatePostById(req: Request<{id: string}, PostInputModel>,
             return;
         }
         await  postsRepository.update(id, req.body);
-        res.status(204)
+        res.status(204).send("Post updated successfully.");
 
     } catch (err) {
         res.status(404).send(err);

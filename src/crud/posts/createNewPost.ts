@@ -1,6 +1,6 @@
 import {Response, Request} from "express";
 import {postsRepository} from "../../Repositories/PostsRepository";
-import {db, PostInputModel, PostViewModel} from "../../db/db-blogs-and-posts";
+import {PostInputModel, PostViewModel} from "../../db/db-blogs-and-posts";
 import {mapToPostViewModel} from "../../core/utils/map-to-viewModel";
 import {ObjectId} from "mongodb";
 import {blogRepository} from "../../Repositories/BlogRepository";
@@ -18,8 +18,8 @@ export async function createNewPost(req: Request<{id: string}, PostInputModel>, 
 
         const blog = await blogRepository.findById(req.body.blogId);
         if(!blog) {
-            res.send('no blog doun').status(404)
-            return
+            res.send('Blog with this id does not exist').status(400);
+            return;
         }
         const newPostView: PostViewModel = {
             ...newPost,

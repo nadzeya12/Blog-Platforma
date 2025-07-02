@@ -1,5 +1,5 @@
 import {WithId} from "mongodb";
-import {BlogModel, BlogViewModel, PostViewModel} from "../../db/db-blogs-and-posts";
+import {BlogModel, BlogViewModel, PostModel, PostViewModel} from "../../db/db-blogs-and-posts";
 
 export function mapToBlogViewModel(blog: WithId<BlogModel>): BlogViewModel {
     return {
@@ -12,7 +12,7 @@ export function mapToBlogViewModel(blog: WithId<BlogModel>): BlogViewModel {
     }
 }
 
-export function mapToPostViewModel(post: WithId<PostViewModel>): PostViewModel {
+export function mapToPostViewModel(post: WithId<PostModel>): PostViewModel {
     return {
         id: post._id.toString(),
         title: post.title,

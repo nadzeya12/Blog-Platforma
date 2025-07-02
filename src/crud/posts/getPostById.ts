@@ -3,12 +3,13 @@ import {postsRepository} from "../../Repositories/PostsRepository";
 import {createErrorMessages} from "../../core/utils/errorUtil";
 import {mapToPostViewModel} from "../../core/utils/map-to-viewModel";
 import {WithId} from "mongodb";
-import {PostViewModel} from "../../db/db-blogs-and-posts";
+import {PostModel} from "../../db/db-blogs-and-posts";
 
 export async function getPostById(req: Request, res: Response) {
     try {
-        const id = req.params._id;
-        const post: WithId<PostViewModel> | null = await postsRepository.findById(id);
+        const id = req.params.id;
+
+        const post: WithId<PostModel> | null = await postsRepository.findById(id);
 
         if (!post) {
             res.status(404).send(createErrorMessages([{

@@ -4,22 +4,15 @@ export type BlogInputModel = {
     websiteUrl: string,
 }
 export type BlogViewModel = BlogModel & {id: string};
-export type BlogModel = {
 
+export type BlogModel = {
     name: string,
     description: string,
     websiteUrl: string,
     createdAt: string,
     isMembership: boolean,
 }
-export type PostInputModel = {
-    title: string,
-    shortDescription: string,
-    content: string,
-    blogId: string,
-}
-export type PostViewModel = {
-    id: string,
+export type PostModel = {
     title: string,
     shortDescription: string,
     content: string,
@@ -27,6 +20,14 @@ export type PostViewModel = {
     blogName:string,
     createdAt: string,
 }
+export type PostInputModel = {
+    title: string,
+    shortDescription: string,
+    content: string,
+    blogId: string,
+}
+export type PostViewModel = PostModel & {id: string};
+
 export const db = {
     Blogs: <BlogModel[]><unknown>[
         {
@@ -54,7 +55,7 @@ export const db = {
             isMembership: false,
         }
     ],
-    Posts: <PostViewModel[]><unknown>[
+    Posts: <PostModel[]><unknown>[
         {
             id: "1",
             title: "Post 1",
