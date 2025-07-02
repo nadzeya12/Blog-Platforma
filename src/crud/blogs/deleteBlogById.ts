@@ -1,7 +1,7 @@
 import {Response, Request} from "express";
 import {blogRepository} from "../../Repositories/BlogRepository";
 import {createErrorMessages} from "../../core/utils/errorUtil";
-import {BlogViewModel, db} from "../../db/db-blogs-and-posts";
+import {BlogModel, db} from "../../db/db-blogs-and-posts";
 
 export async function deleteBlogById(req: Request, res: Response) {
     try {

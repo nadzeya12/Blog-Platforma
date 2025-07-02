@@ -3,8 +3,9 @@ export type BlogInputModel = {
     description: string,
     websiteUrl: string,
 }
-export type BlogViewModel = {
-    id: string,
+export type BlogViewModel = BlogModel & {id: string};
+export type BlogModel = {
+
     name: string,
     description: string,
     websiteUrl: string,
@@ -27,10 +28,9 @@ export type PostViewModel = {
     createdAt: string,
 }
 export const db = {
-    Blogs: <BlogViewModel[]><unknown>[
+    Blogs: <BlogModel[]><unknown>[
         {
             id: "1",
-            _id: "38644230942902a7afe45d91",
             name: "Blog 1",
             description: "something for the description",
             websiteUrl: "https://blogs.google.com/",

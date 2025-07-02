@@ -1,5 +1,5 @@
 import {MongoClient, Db, Collection} from 'mongodb'
-import {BlogViewModel, PostViewModel} from "./db-blogs-and-posts";
+import {BlogModel, PostViewModel} from "./db-blogs-and-posts";
 import {SETTINGS} from "./mongo-settings";
 
 const blogs_collectionn = 'blogs';
@@ -7,14 +7,14 @@ const posts_collectionn = 'posts';
 
 export let client: MongoClient;
 export let postsCollection: Collection<PostViewModel>;
-export let blogsCollection: Collection<BlogViewModel>;
+export let blogsCollection: Collection<BlogModel>;
 
 export async function run(url: string): Promise<void> {
     try {
         client = new MongoClient(url);
         const db: Db = client.db(SETTINGS.name);
 
-        blogsCollection = db.collection<BlogViewModel>(blogs_collectionn);
+        blogsCollection = db.collection<BlogModel>(blogs_collectionn);
         postsCollection = db.collection<PostViewModel>(posts_collectionn);
 
 

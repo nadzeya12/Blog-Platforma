@@ -6,6 +6,7 @@ import {mapToBlogViewModel} from "../../core/utils/map-to-viewModel";
 export async function getBlogById(req: Request, res: Response) {
     try {
         const id = req.params.id;
+        console.log(id, ' id')
         const blog = await blogRepository.findById(id);
 
         if (!blog) {

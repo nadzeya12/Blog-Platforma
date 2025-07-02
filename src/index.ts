@@ -9,7 +9,6 @@ const bootstrap = async () => {
 
   const port = 5000;
 
-
   await run(SETTINGS.uri);
 
   app.listen(port, () => {

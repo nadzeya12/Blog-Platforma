@@ -3,21 +3,28 @@ import {postsRepository} from "../../Repositories/PostsRepository";
 import {db, PostInputModel, PostViewModel} from "../../db/db-blogs-and-posts";
 import {mapToPostViewModel} from "../../core/utils/map-to-viewModel";
 import {ObjectId} from "mongodb";
+import {blogRepository} from "../../Repositories/BlogRepository";
 
 export async function createNewPost(req: Request<{id: string}, PostInputModel>, res: Response) {
 
     try {
-        const index: number = db.Posts.findIndex((post: PostViewModel) => post.id === post.id);
+
         const newPost : PostInputModel = {
             title: req.body.title,
             shortDescription: req.body.shortDescription,
             content: req.body.content,
             blogId: req.body.blogId,
         }
+
+        const blog = await blogRepository.findById(req.body.blogId);
+        if(!blog) {
+            res.send('no blog doun').status(404)
+            return
+        }
         const newPostView: PostViewModel = {
             ...newPost,
             id: new ObjectId().toString(),
-            blogName: db.Posts[index].blogName,
+            blogName: blog.name,
             createdAt: new Date().toISOString(),
         }
         const createdPost = await postsRepository.create(newPostView);
