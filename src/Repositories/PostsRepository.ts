@@ -1,5 +1,5 @@
-import {db, PostInputModel, PostModel, PostViewModel} from "../db/db-blogs-and-posts";
-import {InsertOneResult, ObjectId, WithId} from "mongodb";
+import {PostInputModel, PostModel} from "../db/db-blogs-and-posts";
+import {ObjectId, WithId} from "mongodb";
 import {postsCollection} from "../db/mongo-db";
 
 export const postsRepository = {
@@ -18,7 +18,7 @@ export const postsRepository = {
         const updatedPostWithId = await postsCollection.updateOne(
             {_id: new ObjectId(id)},
             {
-                ...updatedPost,
+                $set: updatedPost,
         });
         if(updatedPostWithId.matchedCount < 1){
             throw new Error("Post does not exist");

@@ -9,7 +9,6 @@ export const blogRepository = {
         return blogsCollection.find().toArray();
     },
     async findById(id: string): Promise<WithId<BlogModel> | null> {
-        console.log(await blogsCollection.find().toArray());
         return blogsCollection.findOne({ _id: new ObjectId(id) });
 },
     async delete(id: string): Promise<void> {
@@ -24,11 +23,15 @@ export const blogRepository = {
     return {...newBlog, _id: insert.insertedId };
 },
     async update(id: string, updatedBlog: BlogInputModel): Promise<void> {
+        console.log('update', updatedBlog);
+        const objId =  new ObjectId(id)
+        console.log(objId);
         const updatedBlogWithId = await blogsCollection.updateOne(
-            { _id: new ObjectId(id)},
+            { _id:objId},
             {
-                ...updatedBlog
+              $set: updatedBlog
         });
+        console.log('updatedBlogWithId', updatedBlogWithId);
         if (updatedBlogWithId.matchedCount < 1) {
             throw new Error("Blog does not exist");
         }
